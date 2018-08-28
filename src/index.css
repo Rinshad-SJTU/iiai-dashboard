@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+body {
+  margin: 0;
+  padding: 0;
+  /*background-color: #636480;*/
+  /*choice1->background-color: #000b18;*/
+  /*innerdiv-choice:#000b18;*/
+  background-color: #00264d;
+  font-family: 'lato', sans-serif;
+}
+
+button {
+	cursor: pointer;
+}
