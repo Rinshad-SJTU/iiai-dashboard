@@ -2,6 +2,7 @@ import React from 'react';
 import './ImageLinkForm.css';
 import Camera from './photo-camera.png';
 import Dropzone from  'react-dropzone';
+import A from '../Logo/labeled1.jpg';
 
 const ImageLinkForm = ({fileSelectHandler, fileUploadHandler, imageURL, upload, onImageDrop, onImageClick}) => {
 	return (
@@ -41,31 +42,43 @@ const ImageLinkForm = ({fileSelectHandler, fileUploadHandler, imageURL, upload, 
 						</div>
 						<div className='' style={{backgroundColor: '#00172d', color: 'white', height: '300px'}}>
 							<div style={{display: 'grid'}}>
-								<label id='meta'>Meta</label>
+								<label id='meta'>Metadata</label>
 							</div>
-							<div style={{overflowY: 'auto', height: '14.9em', margin: '15px 5px'}}>
-								<div style={{float: 'left'}}>
-									<ul id='ol' style={{display: 'none'}}>
-										<li>
-											<p id='x' style={{color: '#6C75C0'}}>Meta: X</p>
-										</li>
-										<li>
-											<p id='y' style={{color: '#B24C8D'}}>Meta: Y</p>
-										</li>
-										<li>
-											<p id='z' style={{color: '#B1A64B'}}>Meta: Z</p>
-										</li>
-									</ul>
+							<div style={{overflowY: 'auto', height: '14.9em', margin: '15px 5px', textAlign: 'left'}}>
+								<div id='header' style={{display: 'none'}}>
+									<div style={{marginTop: '10px'}}>
+										<label style={{fontSize: '1.5em'}}>Filename: <span id='filename'></span></label>
+									</div>
+									<div style={{marginTop: '25px'}}>
+										<label style={{fontSize: '1.5em'}}>Grade: <span id='grade'></span></label>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div className='' style={{backgroundColor: '#00172d', float: 'right', width: '49.5%', color: 'white', height: '608px'}}>
-						<div style={{display: 'grid'}}>
+					<div className='' style={{backgroundColor: '#00172d', float: 'right', width: '49.5%', color: 'white', height: '608px',
+						display: 'flex', alignItems: 'center', position: 'relative', justifyContent: 'center'}}>
+						<div style={{display: 'grid', position: 'absolute', top: '0px', left: '0px'}}>
 							<label id='enlarge'>Inference</label>
 						</div>
+						<div class="loader" id='loader'></div>
 						<div id='enlargeDiv' className='enlargeDiv'>
-							<img id='result' className='enImage' alt='' src={imageURL[0] === null ? Camera : imageURL[0].preview} />
+							{/*<img id='result' className='enImage' alt='' src={imageURL[0] === null ? Camera : imageURL[0].preview} />*/}
+							<img id='result' style={{maxHeight: '525px'}} className='enImage' alt='' src={imageURL[0] === null ? Camera : Camera} />
+							<div id='ul' style={{display: 'none', position: 'absolute', right: '5px', top: '3px'}}>
+							<fieldset 
+								style={{textAlign: 'initial', 
+								backgroundColor: 'rgba(50, 50, 50, 0.5)', 
+								fontSize: '12px',
+								border: 'none'
+								}}>
+    							<legend>Legend</legend>
+								<p id='x' style={{color: 'red'}}>Microaneurysms(MA)</p>
+								<p id='y' style={{color: 'green'}}>Haemorrhages(HE)</p>
+								<p id='z' style={{color: 'yellow'}}>Hard_Exudates(EX)</p>
+								<p id='w' style={{color: 'blue'}}>Soft_Exudates(SE)</p>
+							</fieldset>
+						</div>
 						</div>
 					</div>
 				</div>
