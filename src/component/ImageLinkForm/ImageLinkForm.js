@@ -2,7 +2,6 @@ import React from 'react';
 import './ImageLinkForm.css';
 import Camera from './photo-camera.png';
 import Dropzone from  'react-dropzone';
-import A from '../Logo/labeled1.jpg';
 
 const ImageLinkForm = ({fileSelectHandler, fileUploadHandler, imageURL, upload, onImageDrop, onImageClick}) => {
 	return (
@@ -30,7 +29,7 @@ const ImageLinkForm = ({fileSelectHandler, fileUploadHandler, imageURL, upload, 
 										<div className='boxmodel' key={index}>
 	        								<img 
 	        									id={index} 
-	        									alt='' 
+	        									alt={imageURL[0] === null ? '' : image.name} 
 	        									className='original' 
 	        									src={imageURL[0] === null ? Camera : image.preview}
 	        									onClick={onImageClick.bind(this, index)}
@@ -64,7 +63,7 @@ const ImageLinkForm = ({fileSelectHandler, fileUploadHandler, imageURL, upload, 
 						<div class="loader" id='loader'></div>
 						<div id='enlargeDiv' className='enlargeDiv'>
 							{/*<img id='result' className='enImage' alt='' src={imageURL[0] === null ? Camera : imageURL[0].preview} />*/}
-							<img id='result' style={{maxHeight: '525px'}} className='enImage' alt='' src={imageURL[0] === null ? Camera : Camera} />
+							<img id='result' style={{maxHeight: '525px'}} className='enImage' alt='' src={imageURL[0] === null ? Camera : imageURL[0].preview} />
 							<div id='ul' style={{display: 'none', position: 'absolute', right: '5px', top: '3px'}}>
 							<fieldset 
 								style={{textAlign: 'initial', 

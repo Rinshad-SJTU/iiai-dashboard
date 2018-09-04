@@ -5,5 +5,6 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'tachyons';
 
+// const path = require.context('./processed_images', true);
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
