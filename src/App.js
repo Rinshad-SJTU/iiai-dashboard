@@ -49,6 +49,7 @@ class App extends Component {
   }
 
   onImageDrop = (files) => {
+    document.getElementById('result').src = files[0].preview;
     console.log(files[0].preview);
     if (this.state.imageURL[0] == null) {
       this.state.imageURL.splice(0, 1);
@@ -61,22 +62,56 @@ class App extends Component {
     console.log(files[0]);
     const fd = new FormData();
     fd.append('qqfile', files[0], files[0].name);
+    var loader = document.getElementById('loader');
+    var processing = document.getElementById('processing');
+    loader.style.display = "block";
+    processing.style.display = "block";
+    document.getElementById("grade").innerHTML = '';
     axios.post('http://localhost:5526/upload', fd)
       .then(res => {
+        console.log(res.data)
         document.getElementById("result").src = "http://localhost:5526/static/processed_file/"+res.data.new_image;
+        switch (res.data.label) {
+          case 0:
+            document.getElementById("grade").innerHTML = '0 - Normal';
+            break;
+          case 1:
+            document.getElementById("grade").innerHTML = '1 - Mild NPDR';
+            break;
+          case 2:
+            document.getElementById("grade").innerHTML = '2 - Moderate NPDR';
+            break;
+          case 3:
+            document.getElementById("grade").innerHTML = '3 - Severe NPDR';
+            break;
+          case 4:
+            document.getElementById("grade").innerHTML = '4 - PDR';
+            break;
+          default:
+            document.getElementById("grade").innerHTML = 'Undefined';
+            break;
+        }
+        loader.style.display = "none";
+        processing.style.display = "none";
       });
     document.getElementById("ul").style.display = "block";
     document.getElementById("header").style.display = "block";
-    document.getElementById("grade").innerHTML = "ZZZ";
     document.getElementById("grade").style.color = "red";
-    document.getElementById("filename").innerHTML = "XXX";
+    document.getElementById("filename").innerHTML = files[0].name;
   }
 
-  onImageClick = (index) => {
+  onImageClick = (index, name) => {
+      document.getElementById("grade").innerHTML = '';
+      var processing = document.getElementById('processing');
+      var loader = document.getElementById('loader');
+      loader.style.display = "block";
+      processing.style.display = "block";
       document.getElementById("ul").style.display = "block";
+      document.getElementById("filename").innerHTML = name;
       var result = document.getElementById("result");
       result.src = document.getElementById(index).src;
       const picture = document.getElementById(index);
+      console.log(picture.src);
       fetch(picture.src)
         .then(res => res.blob())
         .then(blob => {
@@ -87,6 +122,28 @@ class App extends Component {
           axios.post('http://localhost:5526/upload', fd)
             .then(res => {
               result.src = "http://localhost:5526/static/processed_file/"+res.data.new_image;
+              switch (res.data.label) {
+                case 0:
+                  document.getElementById("grade").innerHTML = '0 - Normal';
+                  break;
+                case 1:
+                  document.getElementById("grade").innerHTML = '1 - Mild NPDR';
+                  break;
+                case 2:
+                  document.getElementById("grade").innerHTML = '2 - Moderate NPDR';
+                  break;
+                case 3:
+                  document.getElementById("grade").innerHTML = '3 - Severe NPDR';
+                  break;
+                case 4:
+                  document.getElementById("grade").innerHTML = '4 - PDR';
+                  break;
+                default:
+                  document.getElementById("grade").innerHTML = 'Undefined';
+                  break;
+              }
+              loader.style.display = "none";
+              processing.style.display = "none";
             });
         })
       // document.getElementById(index).style.border = 'solid skyblue';

@@ -32,7 +32,7 @@ const ImageLinkForm = ({fileSelectHandler, fileUploadHandler, imageURL, upload, 
 	        									alt={imageURL[0] === null ? '' : image.name} 
 	        									className='original' 
 	        									src={imageURL[0] === null ? Camera : image.preview}
-	        									onClick={onImageClick.bind(this, index)}
+	        									onClick={onImageClick.bind(this, index, imageURL[0] === null ? '' : image.name)}
 	        								/>
 	        							</div>
 	      							))}
@@ -60,7 +60,6 @@ const ImageLinkForm = ({fileSelectHandler, fileUploadHandler, imageURL, upload, 
 						<div style={{display: 'grid', position: 'absolute', top: '0px', left: '0px'}}>
 							<label id='enlarge'>Inference</label>
 						</div>
-						<div class="loader" id='loader'></div>
 						<div id='enlargeDiv' className='enlargeDiv'>
 							{/*<img id='result' className='enImage' alt='' src={imageURL[0] === null ? Camera : imageURL[0].preview} />*/}
 							<img id='result' style={{maxHeight: '525px'}} className='enImage' alt='' src={imageURL[0] === null ? Camera : imageURL[0].preview} />
@@ -78,6 +77,10 @@ const ImageLinkForm = ({fileSelectHandler, fileUploadHandler, imageURL, upload, 
 								<p id='w' style={{color: 'blue'}}>Soft_Exudates(SE)</p>
 							</fieldset>
 						</div>
+						</div>
+						<div style={{position: 'absolute', textAlign: 'center'}}>
+							<div class="loader" id='loader'></div>
+							<p id="processing" style={{display: 'none', margin: 'auto', fontSize: '1.5em'}}>Processing</p>
 						</div>
 					</div>
 				</div>
