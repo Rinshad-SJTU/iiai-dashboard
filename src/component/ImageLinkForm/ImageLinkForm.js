@@ -32,7 +32,9 @@ const ImageLinkForm = ({fileSelectHandler, fileUploadHandler, imageURL, upload, 
 	        									alt={imageURL[0] === null ? '' : image.name} 
 	        									className='original' 
 	        									src={imageURL[0] === null ? Camera : image.preview}
-	        									onClick={onImageClick.bind(this, index, imageURL[0] === null ? '' : image.name)}
+	        									onClick={
+	        										imageURL[0] === null ? '' : onImageClick.bind(this, index, imageURL[0] === null ? '' : image.name)
+	        									}
 	        								/>
 	        							</div>
 	      							))}

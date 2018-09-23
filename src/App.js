@@ -94,7 +94,7 @@ class App extends Component {
         loader.style.display = "none";
         processing.style.display = "none";
       });
-    document.getElementById("ul").style.display = "block";
+    document.getElementById("ul").style.display = "none";
     document.getElementById("header").style.display = "block";
     document.getElementById("grade").style.color = "red";
     document.getElementById("filename").innerHTML = files[0].name;
@@ -106,7 +106,7 @@ class App extends Component {
       var loader = document.getElementById('loader');
       loader.style.display = "block";
       processing.style.display = "block";
-      document.getElementById("ul").style.display = "block";
+      document.getElementById("ul").style.display = "none";
       document.getElementById("filename").innerHTML = name;
       var result = document.getElementById("result");
       result.src = document.getElementById(index).src;
